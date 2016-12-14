@@ -47,6 +47,7 @@ class RequirementsTableViewController: UITableViewController, UIPickerViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureDatePicker()
         datePickerChanged(datePicker: firstDatePicker)
         datePickerChanged(datePicker: secondDatePicker)
         thirdPicker.delegate = self
@@ -64,6 +65,17 @@ class RequirementsTableViewController: UITableViewController, UIPickerViewDelega
         // Dispose of any resources that can be recreated.
     }
     
+    func configureDatePicker() {
+        let minDate = Date()
+        let calendar: Calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        var dateComponents = DateComponents()
+        dateComponents.year = 2
+        let maxDate = calendar.date(byAdding: dateComponents as DateComponents, to: minDate as Date)
+        firstDatePicker.minimumDate = minDate
+        firstDatePicker.maximumDate = maxDate
+        secondDatePicker.maximumDate = maxDate
+    }
+    
     func datePickerChanged(datePicker: UIDatePicker) {
         var dateLabel: UILabel
         var date: String
@@ -71,6 +83,7 @@ class RequirementsTableViewController: UITableViewController, UIPickerViewDelega
         case firstDatePicker:
             dateLabel = firstRowLabel
             date = firstDateString
+            secondDatePicker.minimumDate = firstDatePicker.date
         case secondDatePicker:
             dateLabel = secondRowLabel
             date = secondDateString

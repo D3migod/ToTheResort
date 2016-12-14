@@ -24,6 +24,7 @@ class PlainTourTableViewController: UITableViewController, RequirementsSaver {
         searchController.dimsBackgroundDuringPresentation = false
         tableView.tableHeaderView = searchController.searchBar
         self.clearsSelectionOnViewWillAppear = false
+        self.navigationItem.hidesBackButton = true
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: #selector(PlainTourTableViewController.refresh(sender:)), for: UIControlEvents.valueChanged)
         
